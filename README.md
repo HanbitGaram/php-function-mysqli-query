@@ -43,4 +43,18 @@ function sql_escape($string): string {
 function sql_close(): bool {
     return mysqli_close($_ENV['mLink']);
 }
+
+function sql_begin(){
+    mysqli_autocommit($_ENV['mLink'], 0);
+    return mysqli_begin_transaction($_ENV['mLink']);
+}
+
+function sql_commit(){
+    mysqli_autocommit($_ENV['mLink'], 1);
+    return mysqli_commit($_ENV['mLink']);
+}
+
+function sql_rollback(){
+    return mysqli_rollback($_ENV['mLink']);
+}
 ```
